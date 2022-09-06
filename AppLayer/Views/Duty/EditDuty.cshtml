@@ -1,0 +1,75 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using  FinalProjectBusinessLayer.DTO;
+@model DutyDTO
+
+
+<div class="container topdiv">
+    <h2 class=" mb-4 ">Edit Duty</h2>
+    <form action="/Duty/SubmitEditDuty">
+        <input type="text" value="@ViewBag.Duty.SprintId" hidden asp-for="SprintId" />
+        <input type="text" value="@ViewBag.Duty.DutyId" hidden asp-for="DutyId" />
+
+        <input type="text" value="@ViewBag.ProjectId" hidden name="ProjectId" />
+
+        <div class="form-group">
+            <label> Duty Name</label>
+            <input class="form-control" type="text" value="@ViewBag.Duty.DutyName" asp-for="DutyName">
+            <span class="text-danger" asp-validation-for="DutyName"></span>
+        </div>
+        <div class="form-group">
+            <label>Duty description </label>
+
+            <input class="form-control" type="text" value="@ViewBag.Duty.DutyDescription" asp-for="DutyDescription" />
+
+        </div>
+        <div class="form-group">
+            <label>Duty status</label>
+            <select class="form-control" asp-for="StatusId">
+                @foreach (var status in ViewBag.Statuses)
+                {
+                    if (status.StatusId == @ViewBag.Duty.StatusId)
+                    {
+                        <option selected value="@status.StatusId"> @status.StatusName</option>
+
+                    }
+                    else
+                    {
+                        <option value="@status.StatusId"> @status.StatusName</option>
+
+                    }
+                }
+
+            </select>
+
+        </div>
+        <div class="form-group">
+            <label>Team member</label>
+            <select class="form-control" asp-for="TeamMemberId">
+                @foreach (var member in ViewBag.Members)
+                {
+                    if (member.Id == @ViewBag.Duty.TeamMemberId)
+                    {
+                        <option selected value="@member.Id"> @member.FirstName @member.LastName</option>
+                    }
+                    else
+                    {
+                        <option value="@member.Id"> @member.FirstName @member.LastName</option>
+
+                    }
+                }
+
+            </select>
+        </div>
+
+        <button class="btn btn-lg btn-primary" type="submit">Edit duty</button>
+    </form>
+    </div>

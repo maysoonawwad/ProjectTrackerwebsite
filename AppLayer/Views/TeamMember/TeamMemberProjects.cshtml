@@ -1,0 +1,78 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using System.Security.Claims;
+@if (ViewBag.projects.Count == 0)
+{
+    <div class="container topdiv">
+        <h2>There is no projects</h2>
+
+    </div> }
+else
+{
+    <h2 class="topdiv">My projects</h2>
+
+    <table class="table mt-4  table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    project title
+                </th>
+                <th>
+                    project description
+                </th>
+
+                <th>
+                    deadline date
+                </th>
+
+                <th>
+                    project status
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var project in ViewBag.projects)
+            {
+                <tr>
+                    <td>@project.Project.ProjectTitle</td>
+                    <td>@project.Project.ProjectDescription</td>
+
+                    <td>@project.Project.DeadLine</td>
+                    @*@foreach (var status in ViewBag.statuses)
+                        {
+                            if (@status.StatusId == @project.Project.StatusId)
+                            {
+                                <td>@status.StatusName</td>
+
+                            }
+                        }*@
+
+                    @*<td><a class="btn btn-lg btn-outline-info" asp-route-TeamLeaderId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" asp-route-ProjectId="@project.Project.ProjectId" asp-action="AddSprints" asp-controller="Sprint">Add Sprints</a></td>*@
+                    <td><a asp-action="TMProjectDuties" asp-controller="Duty" class="btn btn-lg btn-primary" asp-route-ProjectId="@project.Project.ProjectId"> Duties </a></td>
+                </tr>
+
+
+            }
+        </tbody>
+
+
+
+
+    </table>
+
+
+}

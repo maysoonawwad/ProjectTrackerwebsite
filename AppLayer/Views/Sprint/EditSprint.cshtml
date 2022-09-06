@@ -1,0 +1,108 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@using  FinalProjectBusinessLayer.DTO;
+@model SprintDTO
+<div class="container topdiv mb-4">
+
+    <h2 class=" mb-4"> Edit sprint</h2>
+    @*@if (ViewBag.isSuccess == true)
+        {
+            <div id="alertdiv" class="alert alert-success" role="alert">
+                Sprint modified successfully  <a href="/Sprint/AllSprints" class="alert-link">click here</a>. to see project sprints.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }*@
+    @if (ViewBag.IsFaild == true)
+    {
+        <div id="alertdiv" class="alert alert-danger" role="alert">
+            Sprint Date Range is later than Project DeadLine
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    @if (ViewBag.IsSprintRangeDateFaild == true)
+    {
+        <div id="alertdiv" class="alert alert-danger" role="alert">
+            Wrong date range
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    @if (ViewBag.IsStartDateFaild == true)
+    {
+        <div id="alertdiv" class="alert alert-danger" role="alert">
+            Start date is earlier than Today date
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    @if (ViewBag.IsNotValidSprintDaterange == true)
+    {
+        <div id="alertdiv" class="alert alert-danger" role="alert">
+            Sprint date range is exist
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    <form action="/Sprint/SubmitEditSprint">
+        <input type="text" value="@ViewBag.Sprint.TeamLeaderId" hidden asp-for="TeamLeaderId" />
+        <input type="text" value="@ViewBag.Sprint.ProjectId" hidden asp-for="ProjectId" />
+        <input type="text" value="@ViewBag.Sprint.SprintId" hidden asp-for="SprintId" />
+
+        <div class="form-group">
+            <label> Start date</label>
+            <input class="form-control" type="datetime" asp-for="StartDate" value="@ViewBag.Sprint.StartDate">
+            <span class="text-danger" asp-validation-for="StartDate"></span>
+
+        </div>
+        <div class="form-group">
+            <label>End date</label>
+            <input class="form-control" type="datetime" asp-for="EndDate" value="@ViewBag.Sprint.EndDate" />
+            @*<span class="text-danger" asp-validation-for="EndDate"></span>*@
+            @Html.ValidationMessageFor(m => m.EndDate, "", new { @class = "text-danger" })
+
+
+        </div>
+        <div class="form-group">
+            <label>Sprint statuses</label>
+            <select class="form-control" asp-for="StatusId">
+                @foreach (var status in ViewBag.Statuses)
+                {
+                    if (status.StatusId == ViewBag.Sprint.StatusId)
+                    {
+                        <option selected value="@status.StatusId"> @status.StatusName</option>
+
+                    }
+                    else
+                    {
+                        <option value="@status.StatusId"> @status.StatusName</option>
+
+                    }
+                }
+
+            </select>
+
+
+
+        </div>
+
+        <button class="btn btn-lg btn-primary" type="submit">Edit sprint</button>
+    </form>
+</div>

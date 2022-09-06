@@ -1,0 +1,77 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@if(ViewBag.Duties.Count == 0)
+{
+
+    <div class="container topdiv">
+        <h2>There in no Duties click the button to add duty</h2>
+
+    </div>
+}else
+{
+    <h2 class=" topdiv">My Duties</h2>
+
+
+    <table class="table   table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Duty title
+                </th>
+
+
+
+                <th>
+                    Duty Description
+                </th>
+                <th>
+                    Duty Status
+                </th>
+                <th>
+                    Activities
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var Duty in ViewBag.Duties)
+            {
+                if (ViewBag.ProjectId == Duty.Sprint.ProjectId)
+                {
+                    <tr>
+
+                        <td>@Duty.DutyName</td>
+                        <td>@Duty.DutyDescription</td>
+
+                        @foreach (var status in ViewBag.Statuses)
+                        {
+                            if (status.StatusId == Duty.StatusId)
+                            {
+                                <td>@status.StatusName</td>
+
+                            }
+                        }
+                        <td><a class="btn btn-primary btn-lg" asp-action="ShowDutyWorks" asp-controller="Work" asp-route-DutyId="@Duty.DutyId"> Show works </a></td>
+
+                    </tr>
+
+                }
+
+
+            }
+        </tbody>
+
+
+    </table>
+
+}
+

@@ -1,0 +1,56 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using  FinalProjectBusinessLayer.DTO;
+@model WorkDTO
+
+@{
+    ViewData["StatusId"] = 1;
+  }
+<div class="container topdiv mb-4">
+    <h2 class="mb-4">Edit work</h2>
+
+
+    <form action="/Work/SubmitEditWork" enctype="multipart/form-data" method="post">
+        <input class="form-control" type="text" value="@ViewBag.work.WorkId" asp-for="WorkId" hidden />
+        <input class="form-control" type="text" value="@ViewBag.work.DutyId" asp-for="DutyId" hidden />
+        <input class="form-control" type="text" value="@ViewData["StatusId"]" asp-for="StatusId" hidden />
+
+        <div class="form-group">
+            <label> Work Description</label>
+            <input class="form-control" type="text" value="@ViewBag.work.WorkDescription" asp-for="WorkDescription" />
+        </div>
+        <p class="mt-4 ">Attachments</p>
+        @foreach (var work in ViewBag.Attachs)
+        {
+
+            <ul class="mb-4">
+                <li>
+
+                    <a href="/Work/GetFile?FileId=@work.WorkAttachmentId&WorkId=@ViewBag.work.WorkId">@work.FileName</a>
+                    <a asp-controller="Work" asp-action="DeleteFile" asp-route-AttachId="@work.WorkAttachmentId" asp-route-WorkId="@ViewBag.work.WorkId" type="button" class="btn btn-sm btn-primary ml-3">Delete File</a>
+
+                </li>
+            </ul>
+
+        }
+       
+        <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">Upload Files</label>
+            <input class="form-control" asp-for="FileData" type="file" id="formFileMultiple" multiple />
+        </div>
+        @if (ViewBag.work.RejectNote != null)
+        {
+            <div class="form-group">
+                <label> Reject note </label>
+                <input class="form-control" type="text" value="@ViewBag.work.RejectNote" asp-for="RejectNote" readonly />
+            </div>
+        }
+
+        <input value="Edit work" class="btn btn-lg btn-primary" type="submit" />
+
+    </form>
+
+</div>

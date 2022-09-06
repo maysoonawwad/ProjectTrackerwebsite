@@ -1,0 +1,64 @@
+﻿
+@using System.Security.Claims;
+
+@if (ViewBag.worksList.Count == 0)
+{
+
+
+    <div class="container topdiv">
+        <h2>There in no works for this duty</h2>
+
+    </div>
+}
+else
+{
+    <h3 class=" topdiv">Duty Works</h3>
+
+    <table class="table mt-4 table-bordered">
+        <thead>
+            <tr>
+
+
+
+
+                <th>
+                    Work
+                </th>
+                <th>
+                    Work Status
+                </th>
+                <th>
+                    Activities
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var work in ViewBag.worksList)
+            {
+                <tr>
+                    <td>@work.WorkDescription</td>
+
+                    @foreach (var status in ViewBag.Statuses)
+                    {
+                        if (status.StatusId == work.StatusId)
+                        {
+                            <td>@status.StatusName</td>
+
+                        }
+                    }
+                    <td><a class="btn btn-lg btn-primary" asp-route-WorkId="@work.WorkId" asp-action="ShowWork" asp-controller="Work"> Submited work</a></td>
+                    @*<td><a class="btn btn-outline-info" asp-route-TeamLeaderId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" asp-action="AllDuties" asp-controller="Duty" asp-route-sprintId="@sprint.SprintId" asp-route-projectId="@sprint.Project.ProjectId"> Duties </a></td>*@
+
+                </tr>
+
+
+            }
+        </tbody>
+
+
+    </table>
+
+
+
+}

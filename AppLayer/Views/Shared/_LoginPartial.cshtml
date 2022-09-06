@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using FinalProjectBusinessLayer.entities;
+@inject SignInManager<Member> SignInManager
+@inject UserManager<Member> UserManager
+@{
+
+    var DisplayName=" ";
+    @if (SignInManager.IsSignedIn(User))
+    {
+        DisplayName = UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).FirstName;
+    }
+
+}
+
+<ul class="navbar-nav flex-row">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link ml-4 scrollto" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @DisplayName!</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="getstarted scrollto btn-outline-light">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+
+
+        <li><a class="getstarted scrollto" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+        @*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>*@
+
+
+
+        <li><a class="getstarted scrollto" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+        @*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>*@
+
+    }
+</ul>

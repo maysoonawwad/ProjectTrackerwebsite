@@ -1,0 +1,101 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using  FinalProjectBusinessLayer.DTO;
+@model ProjectDTO
+    <div class="container topdiv mb-4">
+
+        <h2 class=" mb-4">Edit Project</h2>
+
+        <form action="/Project/SubmitEditProject">
+            <input class="form-control" type="text" value="@ViewBag.ProjectManagerId" asp-for="Ids" hidden>
+            <input class="form-control" type="text" value="@ViewBag.Project.ProjectId" asp-for="ProjectId" hidden>
+
+            <div class="form-group">
+                <label>Project Title</label>
+                <input class="form-control" type="text" asp-for="ProjectTitle" value="@ViewBag.Project.ProjectTitle">
+            </div>
+            <div class="form-group">
+                <label>Project Description</label>
+
+                <input class="form-control" type="text" asp-for="ProjectDescription" value="@ViewBag.Project.ProjectDescription" />
+            </div>
+            <div class="form-group">
+                <label>DeadLine</label>
+                <input class="form-control" type="datetime" asp-for="DeadLine" value="@ViewBag.Project.DeadLine" />
+
+
+            </div>
+            <div class="form-group">
+                <label>Team Leader</label>
+                <select class="form-control" asp-for="TeamLeaderId">
+                    @foreach (var Leader in ViewBag.TeamLeaders)
+                    {
+                        if (ViewBag.ProjectMembers.Contains(Leader.Id))
+                        {
+                            <option selected value="@Leader.Id"> @Leader.FirstName</option>
+                        }
+                        else
+                        {
+                            <option value="@Leader.Id"> @Leader.FirstName</option>
+                        }
+
+                    }
+
+                </select>
+
+
+
+            </div>
+
+            <div class="form-group">
+                <label>Team Members</label>
+                <select class="MemberId form-control" multiple asp-for="Ids">
+                    @foreach (var Member in ViewBag.TeamMembers)
+                    {
+                        if (ViewBag.ProjectMembers.Contains(Member.Id))
+                        {
+                            <option selected value="@Member.Id"> @Member.FirstName</option>
+
+                        }
+                        else
+                        {
+                            <option value="@Member.Id"> @Member.FirstName</option>
+
+                        }
+
+                    }
+
+                </select>
+
+
+
+            </div>
+            <div class="form-group">
+                <label>Project Status</label>
+                <select class="form-control" asp-for="StatusId">
+                    @foreach (var status in ViewBag.Statuses)
+                    {
+                        if (status.StatusId == ViewBag.Project.StatusId)
+                        {
+                            <option selected value="@status.StatusId"> @status.StatusName</option>
+
+                        }
+                        else
+                        {
+                            <option value="@status.StatusId"> @status.StatusName</option>
+
+                        }
+                    }
+
+                </select>
+
+
+
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg">Edit project</button>
+        </form>
+        </div>

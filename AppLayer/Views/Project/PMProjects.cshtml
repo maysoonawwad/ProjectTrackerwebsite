@@ -1,0 +1,99 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+{
+    @if (ViewBag.Projects.Count == 0)
+    {
+<div class="container topdiv">
+    <h2>There in no projects click the button to add project</h2>
+    <a class="btn btn-primary btn-lg mt-3" asp-controller="Project" asp-action="AddProject">Add Project</a>
+
+</div>
+    }
+    else
+    {
+        <h3 class="topdiv">My Projects</h3>
+
+
+        <table class="table mt-4 table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        project title
+                    </th>
+                    <th>
+                        project description
+                    </th>
+
+                    <th>
+                        deadline date
+                    </th>
+
+                    <th>
+                        project status
+                    </th>
+                    <th>
+                        Works History
+                    </th>
+                    <th>
+                        activities
+                    </th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var project in ViewBag.Projects)
+                {
+                    <tr>
+
+
+                        <td>@project.Project.ProjectTitle</td>
+
+                        @if (@project.Project.ProjectDescription == null)
+                        {
+                            <td>no description</td>
+                        }
+                        else
+                        {
+                            <td>@project.Project.ProjectDescription</td>
+                        }
+                        <td>@project.Project.DeadLine</td>
+                        @foreach (var status in ViewBag.statuses)
+                        {
+                            if (@status.StatusId == @project.Project.StatusId)
+                            {
+                                <td>@status.StatusName</td>
+
+                            }
+                        }
+
+
+                        <td>
+                            <a asp-action="WorksHistory" asp-controller="Work" class="btn btn btn-primary" asp-route-ProjectId="@project.Project.ProjectId"> Details </a>
+
+                        </td>
+                        <td>
+                            <a asp-action="DeleteProject" asp-controller="Project" class="btn btn btn-danger" asp-route-ProjectId="@project.Project.ProjectId"> Delete </a>
+                            <a asp-action="EditProject" asp-controller="Project" class="btn btn btn-primary" asp-route-ProjectId="@project.Project.ProjectId"> Edit </a>
+                        </td>
+
+                    </tr>
+
+
+                }
+            </tbody>
+
+
+
+
+        </table>
+
+    }
+
+
+
+

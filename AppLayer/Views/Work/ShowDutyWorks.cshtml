@@ -1,0 +1,83 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@using System.Security.Claims;
+
+
+@if (ViewBag.worksList.Count == 0)
+{
+    <div class="container topdiv">
+        <h2>There in no works click the button to add work</h2>
+        <a class="btn btn-primary btn-lg mt-3" asp-action="AddWork" asp-controller="Work" asp-route-DutyId="@ViewBag.DutyId "> Add Work </a>
+
+    </div> }
+else
+{
+    <h3 class="topdiv">Duty works</h3>
+
+    <table class="table mt-4 table-bordered">
+        <thead>
+            <tr>
+
+
+
+
+                <th>
+                    Work
+                </th>
+                <th>
+                    Work Status
+                </th>
+                <th>
+                    Activities
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var work in ViewBag.worksList)
+            {
+                <tr>
+                    <td>@work.WorkDescription</td>
+
+                    @foreach (var status in ViewBag.Statuses)
+                    {
+                        if (status.StatusId == work.StatusId)
+                        {
+                            <td>@status.StatusName</td>
+
+                        }
+                    }
+                    <td>
+                        <a class="btn btn-lg btn-danger" asp-route-WorkId="@work.WorkId" asp-action="DeleteWork" asp-route-DutyId="@work.DutyId" asp-controller="Work"> Delete </a>
+                        <a class="btn btn-lg btn-primary" asp-route-WorkId="@work.WorkId" asp-action="EditWorkView" asp-controller="Work"> Edit </a>
+
+                    </td>
+
+                </tr>
+
+
+            }
+        </tbody>
+
+
+
+
+    </table>
+    <a class="btn btn-primary btn-lg mt-3" asp-action="AddWork" asp-controller="Work" asp-route-DutyId="@ViewBag.DutyId "> Add Work </a>
+
+    @if (ViewBag.IsWorkCompleted == false || ViewBag.worksList.Count == 0)
+    {
+        <button disabled class="btn btn-primary btn-lg mt-3 ml-2" asp-action="UpdateDutyStatus" asp-controller="Duty" asp-route-DutyId="@ViewBag.DutyId"> Finish </button>
+    }
+    else
+    {
+        <a class="btn btn-primary btn-lg mt-3 ml-2" asp-action="UpdateDutyStatus" asp-controller="Duty" asp-route-DutyId="@ViewBag.DutyId"> Finish </a>
+
+    }
+
+
+}

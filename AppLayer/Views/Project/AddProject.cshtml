@@ -1,0 +1,94 @@
+﻿@using  FinalProjectBusinessLayer.DTO;
+@model ProjectDTO
+
+
+  
+<div class="container topdiv mb-4">
+
+    <h2 class=" mb-4">Add New Project</h2>
+    @if (ViewBag.isSuccess == true)
+    {
+        <div id="alertdiv" class="alert alert-success" role="alert">
+            Project Added Successfully  <a href="/Project/PMProjects" class="alert-link">click here</a>. to see your projects.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    @if (ViewBag.IsDeadlineFaild == true)
+    {
+        <div id="alertdiv" class="alert alert-danger" role="alert">
+            DeadLine is earlier than Today date
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+<form action="/Project/SubmitProject">
+    <input class="form-control" type="text" value="@ViewBag.ProjectManagerId" asp-for="Ids" hidden>
+    <div class="form-group">
+        <label>Project Title</label>
+        <input class="form-control" type="text" asp-for="ProjectTitle">
+        <span class="text-danger" asp-validation-for="ProjectTitle"></span>
+    </div>
+    <div class="form-group">
+        <label>Project Description</label>
+
+        <input class="form-control" type="text" asp-for="ProjectDescription" />
+    </div>
+    <div class="form-group">
+            <label>DeadLine</label>
+
+            <input class="form-control" type="datetime-local" asp-for="DeadLine" />
+
+                    <span class="text-danger" asp-validation-for="DeadLine"></span>
+
+        </div>
+        <div class="form-group">
+        <label>Team leaders</label>
+
+        <select class="form-control" asp-for="TeamLeaderId">
+            <option>Select Team Leader</option>
+            @foreach (var leader in ViewBag.TeamLeaders)
+            {
+                <option value="@leader.Id"> @leader.FirstName @leader.LastName</option>
+            }
+
+        </select>
+            
+        <span asp-validation-for="TeamLeaderId" class="text-danger"></span>
+
+    </div>
+
+        <div class="form-group">
+            <label>Team Members</label>
+            <select class="MemberId form-control" multiple asp-for="Ids">
+                @foreach (var Member in ViewBag.TeamMembers)
+                {
+                    <option value="@Member.Id"> @Member.FirstName @Member.LastName</option>
+                }
+
+            </select>
+
+            <span asp-validation-for="Ids" class="text-danger"></span>
+
+
+        </div>
+    <div class="form-group">
+        <label>Project Status</label>
+        <select class="form-control" asp-for="StatusId">
+            @foreach (var status in ViewBag.Statuses)
+            {
+                <option value="@status.StatusId"> @status.StatusName</option>
+            }
+
+        </select>
+
+
+
+    </div>
+
+    <button id="submitbtn" type="submit" class="btn btn-primary mt-3 btn-lg">Add project</button>
+</form>
+        </div>

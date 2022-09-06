@@ -1,0 +1,104 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using System.Security.Claims;
+@if (ViewBag.sprints.Count == 0)
+{
+<div class="container topdiv">
+    <h2>There is no sprints click the button to add sprint</h2>
+    <a class="btn btn-lg btn-primary mt-3" asp-route-ProjectId="@ViewBag.ProjectId" asp-action="AddSprints" asp-controller="Sprint">Add Sprints</a>
+
+</div> }
+else
+{
+    <h2 class="topdiv">Project sprints</h2>
+
+    <table class="table  table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>
+                    project title
+                </th>
+
+                <th>
+                    sprint StartDate
+                </th>
+                <th>
+                    sprint EndDate
+                </th>
+                <th>
+                    sprint status
+                </th>
+                <th>
+                    Sprint Duties
+                </th>
+                <th>
+                    Activities
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var sprint in ViewBag.sprints)
+            {
+                <tr>
+                    <td>@sprint.Project.ProjectTitle</td>
+                    <td>@sprint.StartDate</td>
+                    <td>@sprint.EndDate</td>
+
+                    @foreach (var status in ViewBag.Statuses)
+                    {
+                        if (status.StatusId == sprint.StatusId)
+                        {
+                            <td>@status.StatusName</td>
+
+                        }
+                    }
+                    <td>
+                        <a class="btn btn-lg btn-primary" asp-route-TeamLeaderId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" asp-action="AllDuties" asp-controller="DutyAPI" asp-route-SprintId="@sprint.SprintId" asp-route-projectId="@sprint.Project.ProjectId"> Duties </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger btn-lg" asp-route-ProjectId="@ViewBag.ProjectId" asp-action="DeleteSprint" asp-controller="Sprint" asp-route-sprintId="@sprint.SprintId"> Delete </a>
+
+                        <a class="btn btn-primary btn-lg" asp-action="EditSprint" asp-controller="Sprint" asp-route-SprintId="@sprint.SprintId"> Edit </a>
+
+                    </td>
+
+                </tr>
+
+
+            }
+        </tbody>
+
+
+
+
+    </table>
+    <a class="btn btn-lg btn-primary mt-3" asp-route-ProjectId="@ViewBag.ProjectId" asp-action="AddSprints" asp-controller="Sprint">Add Sprints</a>
+    @if (ViewBag.IsSprintsCompleted == false || ViewBag.sprints.Count == 0)
+    {
+        <button disabled class="btn btn-primary btn-lg mt-3 ml-2"> Finish </button>
+    }
+    else
+    {
+        <a class="btn btn-primary btn-lg mt-3 ml-2" asp-action="UpdateProjectStatus" asp-controller="Project" asp-route-ProjectId="@ViewBag.ProjectId"> Finish </a>
+
+
+    }
+
+
+}

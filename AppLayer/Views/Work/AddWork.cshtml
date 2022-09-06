@@ -1,0 +1,58 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using  FinalProjectBusinessLayer.DTO;
+@model WorkDTO
+<div class="container topdiv mb-4">
+
+    <h2 class="mb-4">Add New work</h2>
+    @if (ViewBag.IsSuccess == true)
+    {
+        <div id="alertdiv" class="alert alert-success" role="alert">
+            Work Added Successfully  <a href="/Work/ShowDutyWorks?DutyId=@ViewBag.DutyId" class="alert-link">click here</a>. to see duty works .
+            <button typ="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+<form action="/Work/SubmitWork" enctype="multipart/form-data" method="post">
+    <input type="text" value="@ViewBag.DutyId" hidden asp-for="DutyId" />
+
+    <div class="form-group">
+        <label> Work Description</label>
+        <input class="form-control" type="text" asp-for="WorkDescription">
+        <span class="text-danger" asp-validation-for="WorkDescription"></span>
+
+    </div>
+    @*<div class="form-group">
+            <label> File </label>
+                <input class="form-control" type="file"  asp-for="FileData" multiple />
+
+        </div>*@
+    <div class="mb-3">
+        <label for="formFileMultiple" class="form-label">Upload Files</label>
+        <input class="form-control" asp-for="FileData" type="file" id="formFileMultiple" multiple />
+    </div>
+
+    <div class="form-group">
+        <label>Work Status</label>
+        <select  class="form-control" asp-for="StatusId">
+            @foreach (var status in ViewBag.Statuses)
+            {
+                <option value="@status.StatusId"> @status.StatusName</option>
+            }
+
+        </select>
+    </div>
+
+
+    <button class="btn btn-lg btn-primary" type="submit">Add Work</button>
+</form>
+</div>

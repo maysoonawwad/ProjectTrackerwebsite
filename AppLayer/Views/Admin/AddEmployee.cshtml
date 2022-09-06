@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@*<a href="/Admin/AddPMView">Add ProjectManager</a>
+
+    <a href="/Admin/AddTLView">Add TeamLeader</a>
+
+    <a href="/Admin/AddTMView">Add TeamMember</a>*@
+
+<h2 class="mb-3 topdiv ">Employees</h2>
+<div class="row mt-4">
+    <div class="col-sm-6 col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Project manager</h5>
+                <p class="card-text">Project manager is the employee responsible for adding projects</p>
+                <a href="/Admin/AddPMView" class="btn btn-outline-primary">Add</a>
+                <a href="/ProjectManager/ProjectManagers" class="btn btn-outline-primary">Show project managers</a>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Team leader</h5>
+                <p class="card-text">Team leader is the employee responsible for adding project sprints and Duties</p>
+                <a href="/Admin/AddTLView" class="btn btn-outline-primary">Add</a>
+                <a href="/TeamLeader/TeamLeaders" class="btn btn-outline-primary"> Show team leaders </a>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Team member</h5>
+                <p class="card-text">Member is the employee responsible for adding solutions to the project</p>
+                <a href="/Admin/AddTMView" class="btn btn-outline-primary">Add</a>
+                <a href="/TeamMember/TeamMembers" class="btn btn-outline-primary">Show team members </a>
+            </div>
+        </div>
+    </div>
+</div>

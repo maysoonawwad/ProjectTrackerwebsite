@@ -1,0 +1,77 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using  FinalProjectBusinessLayer.DTO;
+@model DutyDTO
+
+@{
+
+
+}
+
+<div class="container topdiv">
+    <h2 class=" mb-4 ">Add New Project</h2>
+    @if (ViewBag.IsSuccess == true)
+    {
+        <div id="alertdiv" class="alert alert-success" role="alert">
+            Duty Added Successfully  <a href="/DutyAPI/AllDuties?sprintId=@ViewBag.SprintId&ProjectId=@ViewBag.ProjectId" class="alert-link">click here</a>. to see Duties.
+            <button typ="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    <form action="/DutyAPI/SubmitDuty" method="post">
+        <input type="text" value="@ViewBag.SprintId" hidden asp-for="SprintId" />
+        <input type="text" value="@ViewBag.ProjectId" hidden name="ProjectId" />
+
+        <div class="form-group">
+            <label> Duty Name</label>
+            <input class="form-control" type="text" asp-for="DutyName">
+            <span class="text-danger" asp-validation-for="DutyName"></span>
+        </div>
+        <div class="form-group">
+            <label>Duty description </label>
+
+            <input class="form-control" type="text" asp-for="DutyDescription" />
+
+        </div>
+        <div class="form-group">
+            <label>Duty statuses</label>
+            <select disabled class="form-control" asp-for="StatusId">
+                @foreach (var status in ViewBag.Statuses)
+                {
+                    <option value="@status.StatusId"> @status.StatusName</option>
+                }
+
+            </select>
+
+        </div>
+        <div class="form-group">
+            <label>Team members</label>
+            <select  class="form-control" asp-for="TeamMemberId">
+                <option value=" ">Select Member</option>
+
+                @foreach (var member in ViewBag.Members)
+
+
+                {
+                    
+                        @if (member.Id != ViewBag.TeamLeaderId)
+
+                        {
+                            <option value="@member.Id"> @member.FirstName  @member.LastName</option>
+                        }
+                    
+
+                }
+
+            </select>
+            <span class="text-danger" asp-validation-for="TeamMemberId"></span>
+
+        </div>
+
+        <button class="btn btn-lg btn-primary" type="submit">Add duty</button>
+    </form>
+</div>

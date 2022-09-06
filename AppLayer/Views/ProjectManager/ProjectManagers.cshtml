@@ -1,0 +1,51 @@
+﻿
+
+<h2 class="topdiv">Project managers</h2>
+
+<table class="table  table-bordered mt-4">
+    <thead>
+        <tr>
+            <th>
+                Employee name
+            </th>
+
+            <th>
+                Employee email
+            </th>
+            <th>
+                Band name
+                </th>
+
+
+            
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var projectManager in ViewBag.ProjectManagers)
+        {
+            <tr>
+                <td>@projectManager.FirstName  @projectManager.LastName</td>
+                <td>@projectManager.Email</td>
+
+
+                @foreach (var Band in ViewBag.Bands)
+                {
+                    if (Band.BandId == projectManager.BandId)
+                    {
+                        <td>@Band.BandTitle</td>
+
+                    }
+                }
+
+
+            </tr>
+
+
+        }
+    </tbody>
+
+
+
+
+</table>
