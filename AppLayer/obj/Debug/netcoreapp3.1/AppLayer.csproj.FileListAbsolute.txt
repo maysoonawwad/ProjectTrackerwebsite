@@ -462,3 +462,5 @@ C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razo
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\TeamMember\TeamMembers.cshtml.g.cs
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\DutyAPI\AddDuty.cshtml.g.cs
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\DutyAPI\AllDuties.cshtml.g.cs
+C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\DutyAPI\AllDutiesAPI.cshtml.g.cs
+C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\RegisterConfirmation.cshtml.g.cs

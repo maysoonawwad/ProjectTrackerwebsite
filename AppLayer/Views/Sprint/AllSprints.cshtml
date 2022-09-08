@@ -1,20 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
 @using System.Security.Claims;
 @if (ViewBag.sprints.Count == 0)
 {
@@ -68,9 +52,10 @@ else
 
                         }
                     }
-                    <td>
-                        <a class="btn btn-lg btn-primary" asp-route-TeamLeaderId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" asp-action="AllDuties" asp-controller="DutyAPI" asp-route-SprintId="@sprint.SprintId" asp-route-projectId="@sprint.Project.ProjectId"> Duties </a>
-                    </td>
+                <td>
+                    <a class="btn btn-lg btn-primary"  asp-route-SprintId="@sprint.SprintId" asp-route-projectId="@sprint.Project.ProjectId"  asp-action="AllDuties" asp-controller="DutyAPI"> Duties </a>
+
+                </td>
                     <td>
                         <a class="btn btn-danger btn-lg" asp-route-ProjectId="@ViewBag.ProjectId" asp-action="DeleteSprint" asp-controller="Sprint" asp-route-sprintId="@sprint.SprintId"> Delete </a>
 

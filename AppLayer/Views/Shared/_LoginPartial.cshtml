@@ -2,15 +2,22 @@
 @using FinalProjectBusinessLayer.entities;
 @inject SignInManager<Member> SignInManager
 @inject UserManager<Member> UserManager
+
+
 @{
 
-    var DisplayName=" ";
-    @if (SignInManager.IsSignedIn(User))
-    {
-        DisplayName = UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).FirstName;
+    var DisplayName = " ";
+    var count = 0;
+
+@if (SignInManager.IsSignedIn(User))
+{
+    DisplayName = UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).FirstName;
+    count = UserManager.Users.ToList().Count;
+}
+
+
     }
 
-}
 
 <ul class="navbar-nav flex-row">
     @if (SignInManager.IsSignedIn(User))
@@ -27,14 +34,19 @@
     else
     {
 
+        if (count != 0)
+        {
+            <li><a class="getstarted scrollto" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+ }
+       
 
-        <li><a class="getstarted scrollto" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
-        @*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>*@
+
+    @*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>*@
 
 
 
-        <li><a class="getstarted scrollto" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
-        @*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>*@
+    <li><a class="getstarted scrollto" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+    @*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>*@
 
     }
 </ul>

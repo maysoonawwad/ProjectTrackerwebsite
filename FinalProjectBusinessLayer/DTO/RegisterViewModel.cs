@@ -13,10 +13,12 @@ namespace FinalProjectBusinessLayer.DTO
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
+        [Required(ErrorMessage ="Band Name required")]
+
         public int BandId { get; set; }
+        public Band Band { get; set; }
 
         public string BandTitle { get; set; }
-        public Band Band { get; set; }
 
         [Required]
         [EmailAddress]

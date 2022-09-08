@@ -33,32 +33,44 @@ else
             </tr>
 
         </thead>
-        <tbody>
+        <tbody id="tBody">
             @foreach (var Duty in ViewBag.Duties)
             {
-                <tr id="tablerow">
+
+            <tr>
+                <td>@Duty.DutyName</td>
+                @if (@Duty.DutyDescription == null)
+                {
 
 
-                    <td>@Duty.DutyName</td>
+                    <td>there is no description</td>
+
+                }
+                else
+                {
                     <td>@Duty.DutyDescription</td>
 
-                    @foreach (var status in ViewBag.Statuses)
+                }
+
+                @foreach (var status in ViewBag.Statuses)
+                {
+                    if (status.StatusId == Duty.StatusId)
                     {
-                        if (status.StatusId == Duty.StatusId)
-                        {
-                            <td>@status.StatusName</td>
+                        <td>@status.StatusName</td>
 
-                        }
                     }
-                    <td><a class="btn btn-lg btn-primary" asp-route-DutyId="@Duty.DutyId" asp-action="TeamLeaderWorksView" asp-controller="Work"> Details </a></td>
-                    <td>
-                        <a class="btn btn-lg btn-danger " href="/Duty/DeleteDuty?DutyId=@Duty.DutyId"> Delete  </a>
-                        <a class="btn btn-lg btn-primary" asp-action="EditDuty" asp-controller="Duty" asp-route-DutyId="@Duty.DutyId" asp-route-ProjectId="@ViewBag.ProjectId"> Edit  </a>
-
-                    </td>
+                }
 
 
-                </tr>
+                <td><a id="details" class="btn btn-lg btn-primary" asp-route-DutyId="@Duty.DutyId" asp-action="TeamLeaderWorksView" asp-controller="Work"> Details </a></td>
+
+                <td>
+                    <a class="btn btn-lg btn-danger " href="/Duty/DeleteDuty?DutyId=@Duty.DutyId&ProjectId=@ViewBag.ProjectId&SprintId=@ViewBag.SprintId"> Delete  </a>
+                    <a class="btn btn-lg btn-primary" asp-action="EditDuty" asp-controller="Duty" asp-route-DutyId="@Duty.DutyId" asp-route-ProjectId="@ViewBag.ProjectId"> Edit  </a>
+                </td>
+
+
+            </tr>
 
 
             }
@@ -82,3 +94,4 @@ else
 
 
 }
+

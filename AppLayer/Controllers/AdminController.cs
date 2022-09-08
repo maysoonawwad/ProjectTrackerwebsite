@@ -74,7 +74,7 @@ namespace AppLayer.Controllers
                 }
 
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("ProjectManagers" , "ProjectManager");
             }
             else
             {
@@ -101,7 +101,7 @@ namespace AppLayer.Controllers
                     }
 
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("TeamLeaders", "TeamLeader");
 
 
 
@@ -131,7 +131,7 @@ namespace AppLayer.Controllers
                 }
 
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("TeamMembers", "TeamMember");
 
             }
             else

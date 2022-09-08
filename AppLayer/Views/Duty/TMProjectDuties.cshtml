@@ -47,22 +47,34 @@
             {
                 if (ViewBag.ProjectId == Duty.Sprint.ProjectId)
                 {
-                    <tr>
+            <tr>
 
-                        <td>@Duty.DutyName</td>
-                        <td>@Duty.DutyDescription</td>
+                <td>@Duty.DutyName</td>
+                @if (@Duty.DutyDescription == null)
+                {
 
-                        @foreach (var status in ViewBag.Statuses)
-                        {
-                            if (status.StatusId == Duty.StatusId)
-                            {
-                                <td>@status.StatusName</td>
 
-                            }
-                        }
-                        <td><a class="btn btn-primary btn-lg" asp-action="ShowDutyWorks" asp-controller="Work" asp-route-DutyId="@Duty.DutyId"> Show works </a></td>
+                    <td>there is no description</td>
 
-                    </tr>
+                }
+                else
+                {
+                    <td>@Duty.DutyDescription</td>
+
+                }
+
+
+                @foreach (var status in ViewBag.Statuses)
+                {
+                    if (status.StatusId == Duty.StatusId)
+                    {
+                        <td>@status.StatusName</td>
+
+                    }
+                }
+                <td><a class="btn btn-primary btn-lg" asp-action="ShowDutyWorks" asp-controller="Work" asp-route-DutyId="@Duty.DutyId"> Show works </a></td>
+
+            </tr>
 
                 }
 

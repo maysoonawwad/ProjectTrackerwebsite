@@ -1,8 +1,10 @@
 ﻿using FinalProjectBusinessLayer.DTO;
 using FinalProjectBusinessLayer.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -27,7 +29,12 @@ namespace AppLayer.Controllers
             _projectManager = projectManager;
         }
 
+        //public IActionResult AllDutiesAPI(int SprintId)
+        //{
+        //    ViewBag.SprintId = SprintId;
 
+        //    return View();
+        //}
 
         public IActionResult AddDuty(int ProjectId, int sprintId, bool IsSuccess = false)
         {
@@ -43,26 +50,26 @@ namespace AppLayer.Controllers
             return View();
         }
 
+         public IActionResult AllDuties(int SprintId, int ProjectId)
+         { 
+        ViewBag.Statuses = _statusRepo.GetStatuses();
+        ViewBag.Duties = _dutyRepo.GetDuties(SprintId);
+        ViewBag.SprintId = SprintId;
+       ViewBag.IsDutyCompleted = _dutyRepo.IsDutiesCompleted(SprintId);
 
+        ViewBag.ProjectId = ProjectId;
 
-        //[HttpGet]
-
-        //public JsonResult GetDutiesAPI(int SprintId)
-        //{
-           
-        //    return Json(Duties.Select(x => new { DutyId = x.DutyId, DutyName = x.DutyName, DutyDescription = x.DutyDescription, StatusId = x.StatusId }));
-        //}
-        public IActionResult AllDuties(int SprintId, int ProjectId)
-        {
-            ViewBag.Statuses = _statusRepo.GetStatuses();
-            ViewBag.Duties = _dutyRepo.GetDuties(SprintId);
-            ViewBag.SprintId = SprintId;
-            ViewBag.IsDutyCompleted = _dutyRepo.IsDutiesCompleted(SprintId);
-
-            ViewBag.ProjectId = ProjectId;
-
-            return View();
+         return View();
         }
+        [HttpGet]
+        public JsonResult GetDutiesAPI(int SprintId)
+         {
+            var Duties = _dutyRepo.GetDuties(SprintId);
+
+             return Json(Duties.Select(x => new { x.DutyName , x.DutyDescription , x.Status , x.SprintId}));
+         }
+
+       
 
 
         [HttpPost]
@@ -86,7 +93,7 @@ namespace AppLayer.Controllers
 
         }
 
-        [HttpDelete("DutyId")]
+        [HttpDelete]
        
         public IActionResult DeleteDuty(int DutyId)
         {
@@ -94,7 +101,7 @@ namespace AppLayer.Controllers
             return View();
         }
 
-
+        
 
     }
 }

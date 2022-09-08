@@ -10,3 +10,4 @@ C:\Users\Lenovo\source\repos\FinalProject2\FinalProjectBusinessLayer\obj\Debug\n
 C:\Users\Lenovo\source\repos\FinalProject2\FinalProjectBusinessLayer\obj\Debug\netcoreapp3.1\FinalProjectBusinessLayer.dll
 C:\Users\Lenovo\source\repos\FinalProject2\FinalProjectBusinessLayer\obj\Debug\netcoreapp3.1\FinalProjectBusinessLayer.pdb
 C:\Users\Lenovo\source\repos\FinalProject2\FinalProjectBusinessLayer\obj\Debug\netcoreapp3.1\FinalProjectBusinessLayer.genruntimeconfig.cache
+C:\Users\Lenovo\source\repos\FinalProject2\FinalProjectBusinessLayer\obj\Debug\netcoreapp3.1\FinalProjectBusinessLayer.csproj.AssemblyReference.cache

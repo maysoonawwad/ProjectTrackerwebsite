@@ -24,37 +24,7 @@ namespace AppLayer.Controllers
             _teamMember = teamMember;
         }
 
-        //public IActionResult AddDuty(int ProjectId  , int sprintId , bool IsSuccess = false)
-        //{
-
-        //    ViewBag.TeamLeaderId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //   ViewBag.IsSuccess = IsSuccess;
-        //    ViewBag.SprintId = sprintId;
-        //    ViewBag.ProjectId = ProjectId;
-              
-        //    ViewBag.Statuses = _statusRepo.GetStatuses();
-        //    ViewBag.Members = _teamMember.GetTeamMembersProject(ProjectId);
-          
-        //    return View();
-        //}
-        //public IActionResult SubmitDuty(DutyDTO dutyDto , int ProjectId)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _dutyRepo.AddDuty(dutyDto);
-        //        return RedirectToAction("AddDuty" , new { IsSuccess = true, sprintId = dutyDto.SprintId, ProjectId = ProjectId });
-        //    }
-        //    else
-        //    {
-        //        ViewBag.TeamLeaderId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //        ViewBag.SprintId = dutyDto.SprintId;
-        //        ViewBag.ProjectId = ProjectId;
-        //        ViewBag.Statuses = _statusRepo.GetStatuses();
-        //        ViewBag.Members = _teamMember.GetTeamMembersProject(ProjectId);
-
-        //        return View(nameof(AddDuty));
-        //    }
-         
+       
             
 
             
@@ -87,10 +57,10 @@ namespace AppLayer.Controllers
             return View();
         }
 
-        public IActionResult DeleteDuty(int DutyId, int ProjectId, int sprintId)
+        public IActionResult DeleteDuty(int DutyId, int ProjectId, int SprintId)
         {
             _dutyRepo.DeleteDuty(DutyId);
-            return RedirectToAction("AllDuties", "DutyAPI" ,new { SprintId = sprintId, ProjectId = ProjectId } );
+            return RedirectToAction("AllDuties", "DutyAPI" ,new { SprintId = SprintId, ProjectId = ProjectId } );
         }
         public IActionResult EditDuty(int DutyId , int ProjectId)
         {
@@ -119,6 +89,13 @@ namespace AppLayer.Controllers
                 return View(nameof(EditDuty));
             }
 
+        }
+
+
+       public IActionResult UpdateDutyStatus(int DutyId)
+        {
+            _dutyRepo.UpdateDutyStatus(DutyId);
+            return RedirectToAction("ShowDutyWorks", "Work");
         }
 
             }

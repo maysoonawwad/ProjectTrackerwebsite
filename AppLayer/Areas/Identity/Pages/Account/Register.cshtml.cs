@@ -24,7 +24,7 @@ namespace AppLayer.Areas.Identity.Pages.Account
         private readonly UserManager<Member> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-
+        
         public RegisterModel(
             UserManager<Member> userManager,
             SignInManager<Member> signInManager,
@@ -61,10 +61,9 @@ namespace AppLayer.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-            [Required]
-          
-            [Display(Name = "Band")]
             public Band Band { get; set; }
+            public int BandId { get; set; }
+        
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -79,16 +78,20 @@ namespace AppLayer.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new Member { UserName = Input.Email, Email = Input.Email , BandId = Input.Band.BandId , EmailConfirmed = true};
+                var user = new Member { UserName = Input.Email, Email = Input.Email , BandId = Input.BandId , EmailConfirmed = true};
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                var userFromDb = _userManager.FindByNameAsync(user.UserName);
+                await _userManager.AddToRoleAsync(await userFromDb, "ADMIN");
+
                 if (result.Succeeded)
                 {
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
+                        "/Admin/AddEmployee",
                         pageHandler: null,
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
