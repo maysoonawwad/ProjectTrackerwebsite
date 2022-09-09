@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'spectrumprojecttracker'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_42C49BF56FAD40C5BF7EA3AFEB42E52D }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D62EAE4F41FA4000B3AD6422A4BFDAD4 }}
           package: .
