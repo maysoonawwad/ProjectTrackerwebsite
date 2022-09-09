@@ -1,4 +1,17 @@
-﻿<section id="hero" class="hero d-flex align-items-center ">
+﻿
+
+@{ 
+    if(ViewBag.UsersCount == 0)
+    {
+        Layout = "_Layout2";
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
+}
+
+<section id="hero" class="hero d-flex align-items-center ">
 
     <div class="">
         <div class="row">

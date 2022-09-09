@@ -7,8 +7,14 @@
 @{
     if (@Model.DisplayConfirmAccountLink)
     {
-    <h2 class="topdiv">
-        successfully registered
-    </h2>
+      
+        <div id="alertdiv" class="alert alert-success topdiv" role="alert">
+            successfully registered  <a asp-area="Identity" asp-page="/Account/Login" class="alert-link">click here</a>. to login .
+            <button typ="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     }
-    }
+
+
+}

@@ -7,12 +7,12 @@
 @{
 
     var DisplayName = " ";
-    var count = 0;
+    
 
 @if (SignInManager.IsSignedIn(User))
 {
     DisplayName = UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).FirstName;
-    count = UserManager.Users.ToList().Count;
+
 }
 
 
@@ -23,7 +23,7 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link ml-4 scrollto" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @DisplayName!</a>
+            <a class="nav-link ml-4 scrollto"  title="Manage">Hello @DisplayName!</a>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
@@ -34,19 +34,7 @@
     else
     {
 
-        if (count != 0)
-        {
-            <li><a class="getstarted scrollto" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
- }
-       
-
-
-    @*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>*@
-
-
-
     <li><a class="getstarted scrollto" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
-    @*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>*@
 
     }
 </ul>

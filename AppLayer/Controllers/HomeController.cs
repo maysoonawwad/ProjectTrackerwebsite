@@ -1,4 +1,5 @@
 ﻿using AppLayer.Models;
+using FinalProjectBusinessLayer.Data;
 using FinalProjectBusinessLayer.entities;
 using FinalProjectBusinessLayer.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -17,21 +18,26 @@ namespace AppLayer.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IProjectRepo _createProject;
         private readonly IStatusRepo _statusRepo;
-        public HomeController(ILogger<HomeController> logger , IProjectRepo createProject , IStatusRepo statusRepo)
+        private readonly ApplicationDbContext _AppContext;
+        public HomeController(ILogger<HomeController> logger , IProjectRepo createProject , IStatusRepo statusRepo, ApplicationDbContext appContext)
         {
             _logger = logger;
             _createProject = createProject;
             _statusRepo = statusRepo;
+            _AppContext = appContext;
         }
      
        
         public IActionResult Index()
         {
-            
+            ViewBag.UsersCount = _AppContext.Users.ToList().Count;
+
                 return View();
 
             
         }
+
+
 
         public IActionResult Privacy()
         {
