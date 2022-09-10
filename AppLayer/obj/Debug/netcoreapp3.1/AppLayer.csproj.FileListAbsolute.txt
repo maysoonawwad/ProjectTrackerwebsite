@@ -460,8 +460,7 @@ C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razo
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\ProjectManager\ProjectManagers.cshtml.g.cs
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\TeamLeader\TeamLeaders.cshtml.g.cs
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\TeamMember\TeamMembers.cshtml.g.cs
-C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\DutyAPI\AddDuty.cshtml.g.cs
-C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\DutyAPI\AllDuties.cshtml.g.cs
-C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\DutyAPI\AllDutiesAPI.cshtml.g.cs
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\RegisterConfirmation.cshtml.g.cs
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout2.cshtml.g.cs
+C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\Duty\AddDuty.cshtml.g.cs
+C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\Duty\AllDuties.cshtml.g.cs

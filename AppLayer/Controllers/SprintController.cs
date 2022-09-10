@@ -189,10 +189,10 @@ namespace AppLayer.Controllers
 
         }
 
-        public IActionResult UpdateSprintStatus(int SprintId)
+        public IActionResult UpdateSprintStatus(int SprintId , int ProjectId)
         {
             _createSprint.UpdateSprintStatus(SprintId);
-            return RedirectToAction(nameof(AllSprints));
+            return RedirectToAction(nameof(AllSprints) , new {ProjectId = ProjectId } );
         }
     }
 }

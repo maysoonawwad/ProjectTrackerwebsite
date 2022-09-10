@@ -77,9 +77,6 @@ namespace FinalProjectBusinessLayer.Repositories
                 _AppContext.SaveChanges();
 
             }
-          
-
-
             _AppContext.Sprints.RemoveRange(sprints);
             _AppContext.SaveChanges();
 
@@ -162,11 +159,6 @@ namespace FinalProjectBusinessLayer.Repositories
 
         }
 
-        //public List<DateTime> GetDeadLinesProjects()
-        //{
-        //    var result = _AppContext.Projects.Select(x => x.DeadLine).ToList();
-        //    return result;
-        //}
 
 
     }

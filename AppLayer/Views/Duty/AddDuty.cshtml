@@ -20,7 +20,7 @@
 
     }
 
-    <form action="/DutyAPI/SubmitDuty" method="post">
+    <form action="/Duty/SubmitDuty" method="post">
         <input id="sprintid" type="text" value="@ViewBag.SprintId" hidden asp-for="SprintId" />
         <input id="projectid" type="text" value="@ViewBag.ProjectId" hidden name="ProjectId" />
 
@@ -70,7 +70,7 @@
 
         </div>
 
-        <button id="submitduty" class="btn btn-lg btn-primary" type="submit" onclick="submit()"> Add duty</button>
+        <button id="submitduty" class="btn btn-lg btn-primary" type="submit" > Add duty</button>
     </form>
 </div>
 

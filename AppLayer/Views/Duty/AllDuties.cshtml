@@ -9,7 +9,7 @@
 {
     <div class="container topdiv">
         <h2>There in no Duties click the button to add duty</h2>
-        <a class="btn btn-primary btn-lg mt-3" asp-action="AddDuty" asp-controller="DutyAPI" asp-route-sprintId="@ViewBag.SprintId" asp-route-ProjectId="@ViewBag.ProjectId"> Add Duty</a>
+        <a class="btn btn-primary btn-lg mt-3" asp-action="AddDuty" asp-controller="Duty" asp-route-sprintId="@ViewBag.SprintId" asp-route-ProjectId="@ViewBag.ProjectId"> Add Duty</a>
 
     </div>
 }
@@ -27,7 +27,7 @@ else
                 <th>
                     Duty Status
                 </th>
-                <th>Submtid Works</th>
+                <th>Submttid Works</th>
                 <th>Activities</th>
 
             </tr>
@@ -80,7 +80,7 @@ else
 
 
     </table>
-    <a class="btn btn-primary btn-lg mt-3" asp-action="AddDuty" asp-controller="DutyAPI" asp-route-sprintId="@ViewBag.SprintId" asp-route-ProjectId="@ViewBag.ProjectId"> Add Duty</a>
+    <a class="btn btn-primary btn-lg mt-3" asp-action="AddDuty" asp-controller="Duty" asp-route-sprintId="@ViewBag.SprintId" asp-route-ProjectId="@ViewBag.ProjectId"> Add Duty</a>
 
     @if (ViewBag.IsDutyCompleted == false || ViewBag.Duties.Count == 0)
     {
@@ -88,7 +88,7 @@ else
     }
     else
     {
-        <a class="btn btn-primary btn-lg mt-3 ml-2" asp-action="UpdateSprintStatus" asp-controller="Sprint" asp-route-SprintId="@ViewBag.SprintId"> Finish </a>
+        <a class="btn btn-primary btn-lg mt-3 ml-2" asp-action="UpdateSprintStatus" asp-controller="Sprint" asp-route-SprintId="@ViewBag.SprintId" asp-route-ProjectId="@ViewBag.ProjectId"> Finish </a>
 
     }
 

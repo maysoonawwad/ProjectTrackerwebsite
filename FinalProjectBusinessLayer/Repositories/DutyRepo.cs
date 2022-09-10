@@ -16,7 +16,6 @@ namespace FinalProjectBusinessLayer.Repositories
         {
             _AppContext = AppContext;
         }
-
         public void AddDuty(DutyDTO dutyDto )
         {
             var Duty  = new Duty();
@@ -29,7 +28,6 @@ namespace FinalProjectBusinessLayer.Repositories
             _AppContext.SaveChanges();
                
         }
-
         public Duty DeleteDuty(int DutyId)
         {
             var works = _AppContext.Works.Where(x => x.DutyId == DutyId).ToList();
@@ -55,7 +53,6 @@ namespace FinalProjectBusinessLayer.Repositories
             return Duty;
 
         }
-
         public void EditDuty(DutyDTO dutyDto)
         {
             var Duty = new Duty();
@@ -68,7 +65,6 @@ namespace FinalProjectBusinessLayer.Repositories
             _AppContext.Duties.Update(Duty);
             _AppContext.SaveChanges();
         }
-
         public List<Duty> GetDuties(int SprintId)
         {
             var duties = _AppContext.Duties.Include(x => x.Sprint).Where(s => s.SprintId == SprintId).ToList();
@@ -89,7 +85,6 @@ namespace FinalProjectBusinessLayer.Repositories
         
         
         }
-
         public void UpdateDutyStatus(int DutyId)
         {
             var duty=  _AppContext.Duties.SingleOrDefault(x => x.DutyId == DutyId);

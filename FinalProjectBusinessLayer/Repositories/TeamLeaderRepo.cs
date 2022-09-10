@@ -26,8 +26,6 @@ namespace FinalProjectBusinessLayer.Repositories
 
         }
 
-       
-
         public async Task<IdentityResult> RegisterTeamLeader(RegisterViewModel model)
         {
             var user = new TeamLeader

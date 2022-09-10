@@ -464,3 +464,4 @@ C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Ap
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\AppLayer.dll
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\AppLayer.pdb
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\AppLayer.genruntimeconfig.cache
+C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Razor\Views\Shared\_Layout2.cshtml.g.cs

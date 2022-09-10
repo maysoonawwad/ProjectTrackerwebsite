@@ -108,11 +108,7 @@ namespace FinalProjectBusinessLayer.Repositories
             var result = _AppContext.Sprints.Include(x => x.Project).Where(s => s.ProjectId == ProjectId).OrderBy(s => s.EndDate).Select(s => s.EndDate).ToList();
 
             return result;
-            
-             
-               
-         
-           
+
 
         }
     }
