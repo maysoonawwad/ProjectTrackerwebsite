@@ -1,4 +1,5 @@
-﻿using FinalProjectBusinessLayer.DTO;
+﻿using AppLayer.Models;
+using FinalProjectBusinessLayer.DTO;
 using FinalProjectBusinessLayer.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,15 +18,19 @@ namespace AppLayer.Controllers
         private readonly IDutyRepo _dutyRepo;
         private readonly IStatusRepo _statusRepo;
         private readonly ITeamMemberRepo _teamMember;
-        private readonly IProjectRepo _createProject;
-        public ProjectController( IProjectRepo createProject , ITeamLeaderRepo teamLeader, IDutyRepo dutyRepo, IStatusRepo statusRepo , ITeamMemberRepo teamMember)
+        private readonly IProjectRepo _Project;
+        private readonly ISprintRepo _SprintRepo;
+        private readonly IWorkReop _workRepo;
+        public ProjectController(ISprintRepo sprintRepo, IProjectRepo Project , ITeamLeaderRepo teamLeader, IDutyRepo dutyRepo, IStatusRepo statusRepo , ITeamMemberRepo teamMember , IWorkReop workRepo)
         {
-          
-            _createProject = createProject;
+
+            _Project = Project;
             _teamLeader = teamLeader;
             _dutyRepo = dutyRepo;
             _statusRepo = statusRepo;
             _teamMember = teamMember;
+            _SprintRepo = sprintRepo;
+            _workRepo = workRepo;
         }
         
         public IActionResult SubmitProject(ProjectDTO ProjectDto)
@@ -37,7 +42,7 @@ namespace AppLayer.Controllers
                 if(DateTime.Compare(ProjectDto.DeadLine , DateTime.Now) == 1)
                 {
                     ProjectDto.Ids.Add(ProjectDto.TeamLeaderId);
-                    _createProject.AddProject(ProjectDto);
+                    _Project.AddProject(ProjectDto);
                     return RedirectToAction("AddProject", new { isSuccess = true });
                 }
                 else
@@ -79,7 +84,7 @@ namespace AppLayer.Controllers
 
         public IActionResult DeleteProject(int ProjectId)
         {
-            _createProject.DeleteProject(ProjectId);
+            _Project.DeleteProject(ProjectId);
             return RedirectToAction("PMProjects");
         }
         
@@ -88,8 +93,8 @@ namespace AppLayer.Controllers
         {
             var ProjectManagerId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             ViewBag.ProjectManagerId = ProjectManagerId;
-            ViewBag.Project = _createProject.GetProject(ProjectId);
-            ViewBag.ProjectMembers = _createProject.GetProjectMembers(ProjectId);
+            ViewBag.Project = _Project.GetProject(ProjectId);
+            ViewBag.ProjectMembers = _Project.GetProjectMembers(ProjectId);
             ViewBag.TeamLeaders = _teamLeader.GetTeamLeaders();
             ViewBag.TeamMembers = _teamMember.GetTeamMembers();
             ViewBag.Statuses = _statusRepo.GetStatuses();
@@ -100,23 +105,56 @@ namespace AppLayer.Controllers
         public IActionResult SubmitEditProject(ProjectDTO ProjectDto)
         {
             ProjectDto.Ids.Add(ProjectDto.TeamLeaderId);
-            _createProject.EditProject(ProjectDto);
+            _Project.EditProject(ProjectDto);
             return RedirectToAction("PMProjects");
         }
         public IActionResult PMProjects()
         {
-
-
+            Globals Global = new Globals();
+            var sprintsNum = 0;
+            var dutyNum = 0;
+            var workNum = 0;
             var ProjectManagerId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            ViewBag.Projects = _createProject.GetProjectManagerProjects(ProjectManagerId);
+            ViewBag.ProjectManagerId = ProjectManagerId;
+            var projects = _Project.GetProjectManagerProjects(ProjectManagerId);
+            var sprints = _SprintRepo.GetAllSprint();
+            var duties = _dutyRepo.GetAllDuties();
+            ViewBag.Projects = projects;
             ViewBag.Statuses = _statusRepo.GetStatuses();
+       
+
+            foreach (var sprint in sprints)
+            {
+                var Sprints = projects.FindAll(x => x.ProjectId == sprint.ProjectId).ToList();
+               
+                sprintsNum += Sprints.Count;
+
+            }
+            foreach (var sprint in sprints)
+            {
+               var dutieslist = duties.FindAll(x => x.SprintId == sprint.SprintId).ToList();
+                dutyNum += dutieslist.Count;
+
+            }
+            foreach (var duty in duties)
+            {
+                var works = _workRepo.GetAllWorks().FindAll(x => x.DutyId == duty.DutyId).ToList(); 
+                workNum += works.Count;
+
+            }
+
+            ViewBag.SprintsNum = sprintsNum;
+                ViewBag.dutyNum = dutyNum;
+            ViewBag.WorkNum = workNum;
             return View();
         }
 
         public IActionResult UpdateProjectStatus(int ProjectId)
         {
-            _createProject.UpdateProjectStatus(ProjectId);
+            _Project.UpdateProjectStatus(ProjectId);
             return RedirectToAction("MyProjects", "TeamLeader");
         }
+
+      
     }
 }

@@ -19,6 +19,11 @@ namespace FinalProjectBusinessLayer.Repositories
         public bool IsSprintsCompleted(int ProjectId);
 
         public List<DateTime> GetLastSprintEndDae(int ProjectId);
+        public List<Sprint> GetAllSprint();
+        public List<SprintDTO> GetProjectManagerSprints(string ProjectManagerId);
+
+
+
 
 
 

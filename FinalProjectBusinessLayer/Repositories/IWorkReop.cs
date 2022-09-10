@@ -12,6 +12,7 @@ namespace FinalProjectBusinessLayer.Repositories
     {
         public void AddWork(List<IFormFile> fileData , WorkDTO workDto);
         public List<Work> GetWorks(int DutyId);
+        public List<Work> GetAllWorks();
 
         public List<WorkAttachment> ShowWorkAttachs(int WorkId);
         public Work GetWork(int WorkId);
@@ -22,11 +23,11 @@ namespace FinalProjectBusinessLayer.Repositories
         public void EditWork(WorkDTO workDto, List<IFormFile> fileData);
 
        public List<WorkAttachment> GetFiles(int WorkId);
-       // public List<IFormFile> FormFiles(int WorkId);
         public List<WorksHistory> GetWorksHistory(int ProjectId);
         public bool IsWorkCompleted(int DutyId);
 
         public void DeleteFile(int AttachId);
+        public List<WorkDTO> PMWorks(string ProjectManagerId);
 
     }
 }

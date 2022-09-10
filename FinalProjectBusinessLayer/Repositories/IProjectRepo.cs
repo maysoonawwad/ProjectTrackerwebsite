@@ -20,7 +20,6 @@ namespace FinalProjectBusinessLayer.Repositories
         public void UpdateProjectStatus(int ProjectId);
         public DateTime GetProjectDeadLine(int ProjectId);
 
-        //public List<DateTime> GetDeadLinesProjects(); 
 
 
 

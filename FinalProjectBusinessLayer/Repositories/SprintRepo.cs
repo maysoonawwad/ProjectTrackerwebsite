@@ -12,9 +12,12 @@ namespace FinalProjectBusinessLayer.Repositories
     public class SprintRepo: ISprintRepo
     {
         private readonly ApplicationDbContext _AppContext;
-        public SprintRepo(ApplicationDbContext AppContext)
+        private readonly IProjectRepo _projectRepo;
+        public SprintRepo(ApplicationDbContext AppContext , IProjectRepo projectRepo )
         {
             _AppContext = AppContext;
+            _projectRepo = projectRepo;
+           
         }
 
         public void AddSprint(SprintDTO sprintdto )
@@ -110,6 +113,41 @@ namespace FinalProjectBusinessLayer.Repositories
             return result;
 
 
+        }
+
+        public List<Sprint> GetAllSprint()
+        {
+            
+
+
+            return _AppContext.Sprints.ToList();
+        }
+
+        public List<SprintDTO> GetProjectManagerSprints(string ProjectManagerId)
+        {
+            var projects = _projectRepo.GetProjectManagerProjects(ProjectManagerId);
+            List<SprintDTO> SprintsList = new List<SprintDTO>();
+            foreach(var project in projects)
+            {
+               var sprints =  _AppContext.Sprints.Include(x => x.Project).Where(x => x.ProjectId == project.ProjectId).ToList();
+
+                foreach(var sprint in sprints)
+                {
+                    SprintsList.Add(new SprintDTO()
+                    {
+                        EndDate = sprint.EndDate,
+                        StartDate = sprint.StartDate,
+                        ProjectTitle = sprint.Project.ProjectTitle,
+                        StatusId = sprint.StatusId,
+                        SprintId = sprint.SprintId
+                        
+
+                    });
+                    
+                }
+               
+            }
+            return SprintsList;
         }
     }
 }

@@ -464,3 +464,6 @@ C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razo
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout2.cshtml.g.cs
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\Duty\AddDuty.cshtml.g.cs
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\Duty\AllDuties.cshtml.g.cs
+C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\Sprint\ProjectManagerSprints.cshtml.g.cs
+C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\Duty\PMDuties.cshtml.g.cs
+C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Debug\netcoreapp3.1\Razor\Views\Work\ProjectManagerWorks.cshtml.g.cs

@@ -121,5 +121,13 @@ namespace AppLayer.Controllers
             return RedirectToAction("ShowDutyWorks", "Work" , new {DutyId = DutyId });
         }
 
+        public IActionResult PMDuties(string ProjectManagerId)
+        {
+            ViewBag.duties = _dutyRepo.ProjectManagerDuties(ProjectManagerId);
+            ViewBag.Statuses = _statusRepo.GetStatuses();
+            return View();
+        }
+
+
             }
 }

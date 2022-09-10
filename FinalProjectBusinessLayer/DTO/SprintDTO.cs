@@ -15,6 +15,7 @@ namespace FinalProjectBusinessLayer.DTO
         public string TeamLeaderId { get; set; }
         public int StatusId { get; set; }
         public int ProjectId { get; set; }
+        public string ProjectTitle { get; set; }
 
 
     }

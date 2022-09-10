@@ -34,7 +34,6 @@ namespace FinalProjectBusinessLayer.Repositories
         public List<TeamMember> GetTeamMembersProject(int projectId)
         {
             List<TeamMember> projectmembers = new List<TeamMember>();
-            //var result = _AppContext.projectsMembers.Include(x => x.Member).Include(x => x.Project).Where(x => x.ProjectId == projectId).ToList();
            var res = _AppContext.projectsMembers.Join(_AppContext.Users, p => p.Id, u => u.Id, (p, u) => new { p.Id, u.FirstName, u.LastName, u.BandId, p.ProjectId }).Join(_AppContext.Projects.Where(x => x.ProjectId == projectId) , u=> u.ProjectId , p => p.ProjectId , (u ,p) => new {u.LastName , u.FirstName , u.Id , u.ProjectId } ).Join(_AppContext.UserRoles.Where(x => x.RoleId == "4"), p => p.Id, r => r.UserId, (p, r) => new { p.ProjectId , p.FirstName , p.LastName , p.Id}).ToList();
            
             foreach(var tm in res)

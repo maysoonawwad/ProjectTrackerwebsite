@@ -17,9 +17,11 @@ namespace FinalProjectBusinessLayer.Repositories
     public class WorkRepo : IWorkReop
     {
         private readonly ApplicationDbContext _AppContext;
-        public WorkRepo(ApplicationDbContext AppContext)
+        private readonly IDutyRepo _DutyRepo;
+        public WorkRepo(ApplicationDbContext AppContext , IDutyRepo dutyRepo)
         {
             _AppContext = AppContext;
+            _DutyRepo = dutyRepo;
         }
 
         public void AddWork(List<IFormFile> FileData,WorkDTO workDto)
@@ -179,31 +181,9 @@ namespace FinalProjectBusinessLayer.Repositories
            
         }
 
-        //public List<IFormFile> FormFiles(int WorkId)
-        //{
-        //    var files = _AppContext.WorkAttachments.Where(x => x.WorkId == WorkId).ToList();
-        //    List<IFormFile> FormFileList = new List<IFormFile>();
-        //    //    // var stream = new MemoryStream();
-        //    //    // stream.Write(result.FileData, 0, result.FileData.Length);
-        //    //    // IFormFile file2 = new FormFile(stream, 0, result.FileData.Length, "name" ,result.FileName );
-        //    //    // formFile.Add(file2);
-        //    //    Stream st = new MemoryStream(result.FileData);
-        //    //    return new FileStreamResult(st, result.ContentType);
-        //    foreach(var file in files)
-        //    {
-        //        var stream = new MemoryStream(file.FileData);
-        //        IFormFile formfile = new FormFile(stream, 0, stream.Length, "name", file.FileName);
-        //        FormFileList.Add(formfile);
-        //    }
-        //    return FormFileList;
-           
-        //}
-
+        
         public List<WorksHistory> GetWorksHistory(int ProjectId)
         {
-            //return _AppContext.Sprints.Where(x => x.ProjectId == ProjectId).Include(x => x.Duties).ThenInclude(x => x.Works).ThenInclude(x => x.WorkHistoryList).ToList();
-
-            //var res = _AppContext.Sprints.Where(x => x.ProjectId == ProjectId).ToList();
             List<WorksHistory> Workhistory = new List<WorksHistory>();
 
             var res2 = _AppContext.Sprints.Where(x => x.ProjectId == ProjectId).Join(_AppContext.Duties, s => s.SprintId, x => x.SprintId, (s, x) => new { dutyId = x.DutyId }).ToList();
@@ -313,6 +293,34 @@ namespace FinalProjectBusinessLayer.Repositories
 
             _AppContext.WorkAttachments.Remove(result);
             _AppContext.SaveChanges();
+        }
+
+        public List<Work> GetAllWorks()
+        {
+            return _AppContext.Works.ToList();
+        }
+
+        public List<WorkDTO> PMWorks(string ProjectManagerId)
+        {
+            var duties = _DutyRepo.ProjectManagerDuties(ProjectManagerId);
+            List<WorkDTO> worksList = new List<WorkDTO>();
+            foreach (var duty in duties)
+            {
+                var works = _AppContext.Works.Where(x => x.DutyId == duty.DutyId).ToList();
+
+                foreach (var work in works)
+                {
+                    worksList.Add(new WorkDTO()
+                    {
+                       WorkDescription = work.WorkDescription,
+                       StatusId = work.StatusId,
+                       
+                    });
+
+                }
+
+            }
+            return worksList;
         }
     }
    

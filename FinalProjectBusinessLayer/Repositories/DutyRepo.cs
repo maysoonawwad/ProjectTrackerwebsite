@@ -12,9 +12,11 @@ namespace FinalProjectBusinessLayer.Repositories
     public class DutyRepo : IDutyRepo
     {
         private readonly ApplicationDbContext _AppContext;
-        public DutyRepo(ApplicationDbContext AppContext)
+        private readonly ISprintRepo _SprintRepo;
+        public DutyRepo(ApplicationDbContext AppContext , ISprintRepo sprintRepo)
         {
             _AppContext = AppContext;
+            _SprintRepo = sprintRepo;
         }
         public void AddDuty(DutyDTO dutyDto )
         {
@@ -105,5 +107,34 @@ namespace FinalProjectBusinessLayer.Repositories
             }
         }
 
+        public List<Duty> GetAllDuties()
+        {
+            return _AppContext.Duties.ToList();
+        }
+
+        public List<DutyDTO> ProjectManagerDuties(string ProjectManagerId)
+        {
+            var sprints = _SprintRepo.GetProjectManagerSprints(ProjectManagerId);
+            List<DutyDTO> dutiesList = new List<DutyDTO>();
+            foreach (var sprint in sprints)
+            {
+                var duties = _AppContext.Duties.Where(x => x.SprintId == sprint.SprintId).ToList();
+
+                foreach (var duty in duties)
+                {
+                    dutiesList.Add(new DutyDTO()
+                    {
+                        DutyName = duty.DutyName,
+                        DutyDescription = duty.DutyDescription,
+                        StatusId = duty.StatusId,
+                        DutyId = duty.DutyId
+
+                    });
+
+                }
+
+            }
+            return dutiesList;
+        }
     }
 }

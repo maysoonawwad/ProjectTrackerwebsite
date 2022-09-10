@@ -21,6 +21,8 @@ namespace FinalProjectBusinessLayer.Repositories
 
         public void UpdateDutyStatus(int DutyId);
         public bool IsDutiesCompleted(int SprintId);
+        public List<Duty> GetAllDuties();
+        public List<DutyDTO> ProjectManagerDuties(string ProjectManagerId);
 
 
     }

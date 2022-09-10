@@ -35,27 +35,7 @@ namespace AppLayer.Controllers
             return View();
         }
 
-        //public IActionResult AddSprints(string TeamLeaderId , int ProjectId)
-        //{
-        //    ViewBag.ProjectId = ProjectId;
-        //    ViewBag.TeamLeaderId = TeamLeaderId;
-        //    ViewBag.statuses = _teamLeaderProject.GetStatuses();
-        //    return View();
-        //}
-
-        
- 
-
-        //public IActionResult SubmitDuty(DutyDTO dutyDto , int sprintId)
-        //{
-
-        //    dutyDto.SprintId = sprintId;
-        //    _dutyRepo.AddDuty(dutyDto);
-
-
-        //    return RedirectToAction("AllSprints");
-        //}
-
+       
         public IActionResult TeamLeaders()
         {
             ViewBag.TeamLeaders = _teamLeader.GetTeamLeaders();

@@ -12,14 +12,14 @@ namespace AppLayer.Controllers
     public class SprintController : Controller
     {
 
-        private readonly ISprintRepo _createSprint;
+        private readonly ISprintRepo _SprintRepo;
 
         private readonly IStatusRepo _statusRepo;
         private readonly IProjectRepo _projectRepo;
 
-        public SprintController(ISprintRepo createSprint , IStatusRepo statusRepo , IProjectRepo projectRepo)
+        public SprintController(ISprintRepo sprintRepo, IStatusRepo statusRepo , IProjectRepo projectRepo)
         {
-            _createSprint = createSprint;
+            _SprintRepo = sprintRepo;
             _statusRepo = statusRepo;
             _projectRepo = projectRepo;
           
@@ -42,10 +42,10 @@ namespace AppLayer.Controllers
         public IActionResult SubmitSprint(SprintDTO sprintdto)
         {
 
-            var dates = _createSprint.GetLastSprintEndDae(sprintdto.ProjectId);
+            var dates = _SprintRepo.GetLastSprintEndDae(sprintdto.ProjectId);
             if (ModelState.IsValid)
             {
-                var sprints = _createSprint.GetSprints(sprintdto.ProjectId);
+                var sprints = _SprintRepo.GetSprints(sprintdto.ProjectId);
                 var deadline = _projectRepo.GetProjectDeadLine(sprintdto.ProjectId);
               
                  foreach(var date in dates)
@@ -71,7 +71,7 @@ namespace AppLayer.Controllers
                     {
                         if (DateTime.Compare(deadline, sprintdto.StartDate) == 1 && DateTime.Compare(deadline, sprintdto.EndDate) == 1)
                         {
-                            _createSprint.AddSprint(sprintdto);
+                            _SprintRepo.AddSprint(sprintdto);
                             return RedirectToAction("AddSprints", new { IsSuccess = true, ProjectId = sprintdto.ProjectId });
                         }
                         else
@@ -115,22 +115,22 @@ namespace AppLayer.Controllers
         
         public IActionResult AllSprints( int ProjectId)
         {
-            ViewBag.IsSprintsCompleted = _createSprint.IsSprintsCompleted(ProjectId);
+            ViewBag.IsSprintsCompleted = _SprintRepo.IsSprintsCompleted(ProjectId);
             ViewBag.Statuses = _statusRepo.GetStatuses();
             ViewBag.ProjectId = ProjectId;
-            ViewBag.sprints = _createSprint.GetSprints(ProjectId);
+            ViewBag.sprints = _SprintRepo.GetSprints(ProjectId);
             return View();
         }
 
        
         public IActionResult DeleteSprint(int SprintId , int ProjectId)
         {
-            _createSprint.DeleteSprint(SprintId);
+            _SprintRepo.DeleteSprint(SprintId);
             return RedirectToAction("AllSprints" , new { ProjectId = ProjectId});
         }
         public IActionResult EditSprint(int SprintId, bool IsFaild = false, bool IsSprintRangeDateFaild = false, bool IsStartDateFaild = false, bool IsNotValidSprintDaterange = false)
         {
-            ViewBag.Sprint = _createSprint.GetSprint(SprintId);
+            ViewBag.Sprint = _SprintRepo.GetSprint(SprintId);
             ViewBag.statuses = _statusRepo.GetStatuses();
 
             return View();
@@ -142,7 +142,7 @@ namespace AppLayer.Controllers
 
             if (ModelState.IsValid)
             {
-                var sprints = _createSprint.GetSprints(sprintDto.ProjectId);
+                var sprints = _SprintRepo.GetSprints(sprintDto.ProjectId);
                 var deadline = _projectRepo.GetProjectDeadLine(sprintDto.ProjectId);
                 if (DateTime.Compare(sprintDto.StartDate, DateTime.Now) == 1)
                 {
@@ -150,12 +150,12 @@ namespace AppLayer.Controllers
                     {
                         if (DateTime.Compare(deadline, sprintDto.StartDate) == 1 && DateTime.Compare(deadline, sprintDto.EndDate) == 1)
                         {
-                            _createSprint.EditSprint(sprintDto);
+                            _SprintRepo.EditSprint(sprintDto);
                             return RedirectToAction("AllSprint", new { ProjectId = sprintDto.ProjectId });
                         }
                         else
                         {
-                            ViewBag.Sprint = _createSprint.GetSprint(sprintDto.SprintId);
+                            ViewBag.Sprint = _SprintRepo.GetSprint(sprintDto.SprintId);
                             ViewBag.statuses = _statusRepo.GetStatuses();
                             ViewBag.IsFaild = true;
                             return View("EditSprint");
@@ -163,7 +163,7 @@ namespace AppLayer.Controllers
                     }
                     else
                     {
-                        ViewBag.Sprint = _createSprint.GetSprint(sprintDto.SprintId);
+                        ViewBag.Sprint = _SprintRepo.GetSprint(sprintDto.SprintId);
                         ViewBag.statuses = _statusRepo.GetStatuses();
                         ViewBag.IsSprintRangeDateFaild = true;
                         return View("EditSprint");
@@ -171,7 +171,7 @@ namespace AppLayer.Controllers
                 }
                 else
                 {
-                    ViewBag.Sprint = _createSprint.GetSprint(sprintDto.SprintId);
+                    ViewBag.Sprint = _SprintRepo.GetSprint(sprintDto.SprintId);
                     ViewBag.statuses = _statusRepo.GetStatuses();
                     ViewBag.IsStartDateFaild = true;
                     return View("EditSprint");
@@ -180,7 +180,7 @@ namespace AppLayer.Controllers
             }
             else
             {
-                ViewBag.Sprint = _createSprint.GetSprint(sprintDto.SprintId);
+                ViewBag.Sprint = _SprintRepo.GetSprint(sprintDto.SprintId);
                 ViewBag.statuses = _statusRepo.GetStatuses();
 
                 return View("EditSprint");
@@ -191,8 +191,14 @@ namespace AppLayer.Controllers
 
         public IActionResult UpdateSprintStatus(int SprintId , int ProjectId)
         {
-            _createSprint.UpdateSprintStatus(SprintId);
+            _SprintRepo.UpdateSprintStatus(SprintId);
             return RedirectToAction(nameof(AllSprints) , new {ProjectId = ProjectId } );
+        }
+        public IActionResult ProjectManagerSprints(string ProjectManagerId)
+        {
+            ViewBag.Sprints = _SprintRepo.GetProjectManagerSprints(ProjectManagerId);
+            ViewBag.Statuses = _statusRepo.GetStatuses();
+            return View();
         }
     }
 }

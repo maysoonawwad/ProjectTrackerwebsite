@@ -3,96 +3,259 @@
 *@
 @{
 }
-
-
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/css/style.css" rel="stylesheet" />
 {
-    @if (ViewBag.Projects.Count == 0)
-    {
-<div class="container topdiv">
-    <h2>There in no projects click the button to add project</h2>
-    <a class="btn btn-primary btn-lg mt-3" asp-controller="Project" asp-action="AddProject">Add Project</a>
+@if (ViewBag.Projects.Count == 0)
+{
+    <div class="row topdiv">
+        <div class="col-sm-6 col-md-3 ">
+            <div class="card shadow  border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa-archive fa-3x text-info" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title">Projects</h5>
+                            <p class="card-text font-weight-bold">@ViewBag.Projects.Count</p>
 
-</div>
-    }
-    else
-    {
-        <h3 class="topdiv">My Projects</h3>
+                        </div>
+
+                    </div>
+                    <a href="" class="btn btn-light" style="margin-left: 82% ; margin-top: 2%; margin-bottom: -10px"><i class="fa fa-external-link fa-lg" aria-hidden="true"></i></a>
 
 
-        <table class="table mt-4 table-bordered">
-            <thead>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 ">
+            <div class="card shadow  border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa-calendar-check-o fa-3x text-warning" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title">Sprints</h5>
+                            <p class="card-text font-weight-bold">@ViewBag.SprintsNum</p>
+
+                        </div>
+
+                    </div>
+                    <a href="/Sprint/ProjectManagerSprints?ProjectManagerId=@ViewBag.ProjectManagerId" class="btn btn-light" style="margin-left: 82% ; margin-top: 2%; margin-bottom: -10px"><i class="fa fa-external-link fa-lg" aria-hidden="true"></i></a>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 ">
+            <div class="card shadow  border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa-file-pdf-o fa-3x text-success" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title">works</h5>
+                            <p class="card-text font-weight-bold">@ViewBag.WorkNum</p>
+
+                        </div>
+
+                    </div>
+                    <a href="/Work/ProjectManagerWorks?ProjectManagerId=@ViewBag.ProjectManagerId" class="btn btn-light" style="margin-left: 82% ; margin-top: 2%; margin-bottom: -10px"><i class="fa fa-external-link fa-lg" aria-hidden="true"></i></a>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="card shadow  border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa fa-list fa-3x text-danger" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title">Duties</h5>
+                            <p class="card-text font-weight-bold">@ViewBag.dutyNum</p>
+                        </div>
+
+                    </div>
+                    <a href="/Duty/PMDuties?ProjectManagerId=@ViewBag.ProjectManagerId" class="btn btn-light" style="margin-left: 82% ; margin-top: 2%; margin-bottom: -10px"><i class="fa fa-external-link fa-lg" aria-hidden="true"></i></a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h2>There in no projects click the button to add project</h2>
+        <a class="btn btn-primary btn-lg mt-3" asp-controller="Project" asp-action="AddProject">Add Project</a>
+
+    </div>
+}
+else
+{
+    <div class="row topdiv">
+        <div class="col-sm-6 col-md-3 ">
+            <div class="card shadow  border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa-archive fa-3x text-info" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title">Projects</h5>
+                            <p class="card-text font-weight-bold">@ViewBag.Projects.Count</p>
+
+                        </div>
+
+                    </div>
+                    <a href="" class="btn btn-light" style="margin-left: 82% ; margin-top: 2%; margin-bottom: -10px"><i class="fa fa-external-link fa-lg" aria-hidden="true"></i></a>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 ">
+            <div class="card shadow  border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa-calendar-check-o fa-3x text-warning" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title">Sprints</h5>
+                            <p class="card-text font-weight-bold">@ViewBag.SprintsNum</p>
+
+                        </div>
+
+                    </div>
+                    <a href="/Sprint/ProjectManagerSprints?ProjectManagerId=@ViewBag.ProjectManagerId" class="btn btn-light" style="margin-left: 82% ; margin-top: 2%; margin-bottom: -10px"><i class="fa fa-external-link fa-lg" aria-hidden="true"></i></a>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 ">
+            <div class="card shadow  border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa-file-pdf-o fa-3x text-success" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title">works</h5>
+                            <p class="card-text font-weight-bold">@ViewBag.WorkNum</p>
+
+                        </div>
+
+                    </div>
+                    <a href="/Work/ProjectManagerWorks?ProjectManagerId=@ViewBag.ProjectManagerId" class="btn btn-light" style="margin-left: 82% ; margin-top: 2%; margin-bottom: -10px"><i class="fa fa-external-link fa-lg" aria-hidden="true"></i></a>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="card shadow  border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa fa-list fa-3x text-danger" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title">Duties</h5>
+                            <p class="card-text font-weight-bold">@ViewBag.dutyNum</p>
+                        </div>
+
+                    </div>
+                    <a href="/Duty/PMDuties?ProjectManagerId=@ViewBag.ProjectManagerId" class="btn btn-light" style="margin-left: 82% ; margin-top: 2%; margin-bottom: -10px"><i class="fa fa-external-link fa-lg" aria-hidden="true"></i></a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <table class="table mt-5 table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    project title
+                </th>
+                <th>
+                    project description
+                </th>
+
+                <th>
+                    deadline date
+                </th>
+
+                <th>
+                    project status
+                </th>
+                <th>
+                    Works History
+                </th>
+                <th>
+                    activities
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var project in ViewBag.Projects)
+            {
                 <tr>
-                    <th>
-                        project title
-                    </th>
-                    <th>
-                        project description
-                    </th>
 
-                    <th>
-                        deadline date
-                    </th>
 
-                    <th>
-                        project status
-                    </th>
-                    <th>
-                        Works History
-                    </th>
-                    <th>
-                        activities
-                    </th>
+                    <td>@project.Project.ProjectTitle</td>
+
+                    @if (@project.Project.ProjectDescription == null)
+                    {
+                        <td>no description</td>
+                    }
+                    else
+                    {
+                        <td>@project.Project.ProjectDescription</td>
+                    }
+                    <td>@project.Project.DeadLine</td>
+                    @foreach (var status in ViewBag.statuses)
+                    {
+                        if (@status.StatusId == @project.Project.StatusId)
+                        {
+                            <td>@status.StatusName</td>
+
+                        }
+                    }
+
+
+                    <td>
+                        <a asp-action="WorksHistory" asp-controller="Work" class="btn btn btn-primary" asp-route-ProjectId="@project.Project.ProjectId"> Details </a>
+
+                    </td>
+                    <td>
+                        <a asp-action="DeleteProject" asp-controller="Project" class="btn btn btn-danger" asp-route-ProjectId="@project.Project.ProjectId"> Delete </a>
+                        <a asp-action="EditProject" asp-controller="Project" class="btn btn btn-primary" asp-route-ProjectId="@project.Project.ProjectId"> Edit </a>
+                    </td>
+
                 </tr>
 
-            </thead>
-            <tbody>
-                @foreach (var project in ViewBag.Projects)
-                {
-                    <tr>
 
-
-                        <td>@project.Project.ProjectTitle</td>
-
-                        @if (@project.Project.ProjectDescription == null)
-                        {
-                            <td>no description</td>
-                        }
-                        else
-                        {
-                            <td>@project.Project.ProjectDescription</td>
-                        }
-                        <td>@project.Project.DeadLine</td>
-                        @foreach (var status in ViewBag.statuses)
-                        {
-                            if (@status.StatusId == @project.Project.StatusId)
-                            {
-                                <td>@status.StatusName</td>
-
-                            }
-                        }
-
-
-                        <td>
-                            <a asp-action="WorksHistory" asp-controller="Work" class="btn btn btn-primary" asp-route-ProjectId="@project.Project.ProjectId"> Details </a>
-
-                        </td>
-                        <td>
-                            <a asp-action="DeleteProject" asp-controller="Project" class="btn btn btn-danger" asp-route-ProjectId="@project.Project.ProjectId"> Delete </a>
-                            <a asp-action="EditProject" asp-controller="Project" class="btn btn btn-primary" asp-route-ProjectId="@project.Project.ProjectId"> Edit </a>
-                        </td>
-
-                    </tr>
-
-
-                }
-            </tbody>
+            }
+        </tbody>
 
 
 
 
-        </table>
+    </table>
 
-    }
+}
 
 
 

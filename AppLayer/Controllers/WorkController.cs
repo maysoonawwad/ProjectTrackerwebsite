@@ -130,6 +130,13 @@ namespace AppLayer.Controllers
             _workRepo.DeleteFile(AttachId);
             return RedirectToAction(nameof(EditWorkView) , new { WorkId = WorkId } );
         }
+        public IActionResult ProjectManagerWorks(string ProjectManagerId)
+        {
+            ViewBag.works = _workRepo.PMWorks(ProjectManagerId);
+            ViewBag.statuses = _statusRepo.GetStatuses();
+            return View();
+
+        }
 
     }
 }

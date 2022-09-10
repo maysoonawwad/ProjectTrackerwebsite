@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<h2 class="topdiv">Sprints</h2>
+
+<table class="table  table-bordered mt-4">
+    <thead>
+        <tr>
+            <th>
+                Duty name
+            </th>
+
+            <th>
+                Duty description
+            </th>
+            <th>
+                Duty status
+            </th>
+            
+
+
+
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var duty in ViewBag.duties)
+        {
+            <tr>
+                <td>@duty.DutyName</td>
+                <td>@duty.DutyDescription</td>
+
+
+                @foreach (var status in ViewBag.Statuses)
+                {
+                    if (status.StatusId == duty.StatusId)
+                    {
+                        <td>@status.StatusName</td>
+
+                    }
+                }
+
+
+            </tr>
+
+
+        }
+    </tbody>
+
+
+
+
+</table>

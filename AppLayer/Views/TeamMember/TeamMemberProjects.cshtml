@@ -52,16 +52,6 @@ else
                     <td>@project.Project.ProjectDescription</td>
 
                     <td>@project.Project.DeadLine</td>
-                    @*@foreach (var status in ViewBag.statuses)
-                        {
-                            if (@status.StatusId == @project.Project.StatusId)
-                            {
-                                <td>@status.StatusName</td>
-
-                            }
-                        }*@
-
-                    @*<td><a class="btn btn-lg btn-outline-info" asp-route-TeamLeaderId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" asp-route-ProjectId="@project.Project.ProjectId" asp-action="AddSprints" asp-controller="Sprint">Add Sprints</a></td>*@
                     <td><a asp-action="TMProjectDuties" asp-controller="Duty" class="btn btn-lg btn-primary" asp-route-ProjectId="@project.Project.ProjectId"> Duties </a></td>
                 </tr>
 
