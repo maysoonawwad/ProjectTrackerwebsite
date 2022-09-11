@@ -427,9 +427,6 @@ C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Ra
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Razor\Views\Admin\AddPMView.cshtml.g.cs
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Razor\Views\Admin\AddTLView.cshtml.g.cs
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Razor\Views\Admin\AddTMView.cshtml.g.cs
-C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Razor\Views\DutyAPI\AddDuty.cshtml.g.cs
-C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Razor\Views\DutyAPI\AllDuties.cshtml.g.cs
-C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Razor\Views\DutyAPI\AllDutiesAPI.cshtml.g.cs
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Razor\Views\Duty\EditDuty.cshtml.g.cs
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Razor\Views\Duty\TMProjectDuties.cshtml.g.cs
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
@@ -465,3 +462,8 @@ C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Ap
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\AppLayer.pdb
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\AppLayer.genruntimeconfig.cache
 C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Razor\Views\Shared\_Layout2.cshtml.g.cs
+C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Razor\Views\Duty\AddDuty.cshtml.g.cs
+C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Razor\Views\Duty\AllDuties.cshtml.g.cs
+C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Razor\Views\Duty\PMDuties.cshtml.g.cs
+C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Razor\Views\Sprint\ProjectManagerSprints.cshtml.g.cs
+C:\Users\Lenovo\source\repos\FinalProject2\AppLayer\obj\Release\netcoreapp3.1\Razor\Views\Work\ProjectManagerWorks.cshtml.g.cs
