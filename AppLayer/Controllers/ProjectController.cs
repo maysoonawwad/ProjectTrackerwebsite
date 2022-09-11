@@ -110,7 +110,6 @@ namespace AppLayer.Controllers
         }
         public IActionResult PMProjects()
         {
-            Globals Global = new Globals();
             var sprintsNum = 0;
             var dutyNum = 0;
             var workNum = 0;
