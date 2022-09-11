@@ -122,25 +122,30 @@ namespace AppLayer.Controllers
             ViewBag.Statuses = _statusRepo.GetStatuses();
        
 
-            foreach (var sprint in sprints)
+            foreach (var project in projects)
             {
-                var Sprints = projects.FindAll(x => x.ProjectId == sprint.ProjectId).ToList();
-               
+                var Sprints = sprints.Where(x => x.ProjectId == project.ProjectId).ToList();
                 sprintsNum += Sprints.Count;
 
-            }
-            foreach (var sprint in sprints)
-            {
-               var dutieslist = duties.FindAll(x => x.SprintId == sprint.SprintId).ToList();
-                dutyNum += dutieslist.Count;
+                foreach (var sprint2 in Sprints)
+                {
+                    var dutieslist = duties.Where(x => x.SprintId == sprint2.SprintId).ToList();
+                    dutyNum += dutieslist.Count;
+
+                    foreach (var duty in dutieslist)
+                    {
+                        var works = _workRepo.GetAllWorks().Where(x => x.DutyId == duty.DutyId).ToList();
+                        workNum += works.Count;
+
+                    }
+
+                }
 
             }
-            foreach (var duty in duties)
-            {
-                var works = _workRepo.GetAllWorks().FindAll(x => x.DutyId == duty.DutyId).ToList(); 
-                workNum += works.Count;
 
-            }
+          
+
+           
 
             ViewBag.SprintsNum = sprintsNum;
                 ViewBag.dutyNum = dutyNum;
